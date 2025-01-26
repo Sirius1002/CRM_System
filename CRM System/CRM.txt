@@ -1,0 +1,21 @@
+digraph CustomerManagementSystem {
+    rankdir=LR;
+    node [shape=box, style=filled, color=lightblue];
+
+    "Main Menu" -> "Customer Management";
+    "Main Menu" -> "Interaction Tracking";
+    "Main Menu" -> "Authentication";
+    "Main Menu" -> "Reports";
+
+    "Customer Management" -> "Add Customer";
+    "Customer Management" -> "View Customers";
+
+    "Interaction Tracking" -> "Log Interaction";
+    "Interaction Tracking" -> "View Interactions";
+
+    "Authentication" -> "Login";
+    "Authentication" -> "Logout";
+
+    "Reports" -> "Generate Reports";
+    "Reports" -> "View Reports";
+}

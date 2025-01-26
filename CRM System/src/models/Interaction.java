@@ -1,43 +1,24 @@
 package models;
 
-import java.time.LocalDateTime;
-
 public class Interaction {
-    private String customerName;
-    private String interactionType; // e.g., "Call", "Meeting", etc.
-    private String notes;
-    private LocalDateTime timestamp;
+    private String customerId;
+    private String interactionDetails;
 
-    public Interaction(String customerName, String interactionType, String notes) {
-        this.customerName = customerName;
-        this.interactionType = interactionType;
-        this.notes = notes;
-        this.timestamp = LocalDateTime.now(); // Automatically set the current time
+    public Interaction(String customerId, String interactionDetails) {
+        this.customerId = customerId;
+        this.interactionDetails = interactionDetails;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public String getInteractionType() {
-        return interactionType;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
+    public String getInteractionDetails() {
+        return interactionDetails;
     }
 
     @Override
     public String toString() {
-        return "Interaction{" +
-                "customerName='" + customerName + '\'' +
-                ", interactionType='" + interactionType + '\'' +
-                ", notes='" + notes + '\'' +
-                ", timestamp=" + timestamp +
-                '}';
+        return "Customer ID: " + customerId + ", Interaction: " + interactionDetails;
     }
 }

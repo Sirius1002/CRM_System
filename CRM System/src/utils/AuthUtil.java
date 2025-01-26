@@ -1,38 +1,31 @@
 package utils;
 
 import models.User;
-import java.util.ArrayList;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class AuthUtil {
-    private static ArrayList<User> users = new ArrayList<>();
+    private static Map<String, String> users = new HashMap<>();
+    private static Scanner scanner = new Scanner(System.in);
 
-    public static void registerUser() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter username: ");
-        String username = scanner.nextLine();
-        System.out.print("Enter password: ");
-        String password = scanner.nextLine();
-
-        User newUser = new User(username, password);
-        users.add(newUser);
-        System.out.println("User registered successfully!");
+    static {
+        users.put("admin", "password");
     }
 
-    public static boolean loginUser() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter username: ");
+    public static boolean authenticate() {
+        System.out.print("Enter Username: ");
         String username = scanner.nextLine();
-        System.out.print("Enter password: ");
+        System.out.print("Enter Password: ");
         String password = scanner.nextLine();
 
-        for (User user : users) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                System.out.println("Login successful!");
-                return true;
-            }
+        if (users.containsKey(username) && users.get(username).equals(password)) {
+            System.out.println("Authentication successful!");
+            return true;
+        } else {
+            System.out.println("Invalid username or password.");
+            return false;
         }
-        System.out.println("Invalid credentials.");
-        return false;
     }
 }

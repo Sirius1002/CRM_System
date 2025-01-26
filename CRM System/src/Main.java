@@ -1,46 +1,28 @@
-import utils.AuthUtil;
 import services.CustomerService;
 import services.InteractionService;
+import utils.AuthUtil;
+
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        boolean isLoggedIn = false;
 
-        System.out.println("Welcome to the CRM System!");
+        if (!AuthUtil.authenticate()) {
+            return;
+        }
 
-        // Login or Register Loop
-        while (!isLoggedIn) {
-            System.out.println("1. Login");
-            System.out.println("2. Register");
-            System.out.print("Choose an option: ");
+        while (true) {
+            System.out.println("\n=== Customer Management System ===");
+            System.out.println("1. Customer Management");
+            System.out.println("2. Interaction Tracking");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
 
             switch (choice) {
-                case 1:
-                    isLoggedIn = AuthUtil.loginUser();
-                    break;
-                case 2:
-                    AuthUtil.registerUser();
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-            }
-        }
-
-        // After login, show main menu
-        boolean exit = false;
-        while (!exit) {
-            System.out.println("\nMain Menu:");
-            System.out.println("1. Manage Customers");
-            System.out.println("2. Logout");
-            System.out.print("Choose an option: ");
-            int mainChoice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
-
-            switch (mainChoice) {
                 case 1:
                     System.out.println("\nCustomer Management:");
                     System.out.println("1. Add Customer");
@@ -63,15 +45,18 @@ public class Main {
                         System.out.println("Invalid choice.");
                     }
                     break;
+
                 case 2:
-                    exit = true;
-                    System.out.println("Logged out successfully!");
+                    InteractionService.viewInteractions();
                     break;
+
+                case 3:
+                    System.out.println("Exiting the system. Goodbye!");
+                    return;
+
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
         }
-
-        scanner.close();
     }
 }

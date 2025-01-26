@@ -1,23 +1,22 @@
 package services;
 
 import models.Interaction;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InteractionService {
-    private static ArrayList<Interaction> interactions = new ArrayList<>();
+    private static List<Interaction> interactions = new ArrayList<>();
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void logInteraction() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter customer name: ");
-        String customerName = scanner.nextLine();
-        System.out.print("Enter interaction type (e.g., Call, Meeting): ");
-        String interactionType = scanner.nextLine();
-        System.out.print("Enter notes: ");
-        String notes = scanner.nextLine();
+        System.out.print("Enter Customer ID: ");
+        String customerId = scanner.nextLine();
+        System.out.print("Enter Interaction Details: ");
+        String details = scanner.nextLine();
 
-        Interaction interaction = new Interaction(customerName, interactionType, notes);
-        interactions.add(interaction);
+        interactions.add(new Interaction(customerId, details));
         System.out.println("Interaction logged successfully!");
     }
 
@@ -25,6 +24,7 @@ public class InteractionService {
         if (interactions.isEmpty()) {
             System.out.println("No interactions found.");
         } else {
+            System.out.println("Interactions:");
             for (Interaction interaction : interactions) {
                 System.out.println(interaction);
             }
